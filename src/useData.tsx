@@ -5,6 +5,13 @@ type Something = {
   id: string;
 };
 
+const hydrateData = <T,>(data: T): T => {
+  // Costly operation
+  console.log("Hydrating");
+  Array(50).map((n) => Math.sqrt(n));
+  return data;
+};
+
 const useData = () => {
   const { data } = useQuery<Something[]>({
     queryKey: ["localhost:8000"],
@@ -17,11 +24,7 @@ const useData = () => {
     },
   });
 
-  const hydratedData = useMemo(() => {
-    console.log("Hydrating");
-    Array(5).map((n) => Math.sqrt(n));
-    return data;
-  }, [data]);
+  const hydratedData = useMemo(() => hydrateData(data), [data]);
 
   return hydratedData;
 };
