@@ -1,8 +1,12 @@
 import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 
+type Something = {
+  id: string;
+};
+
 const useData = () => {
-  const { data } = useQuery({
+  const { data } = useQuery<Something[]>({
     queryKey: ["localhost:8000"],
     queryFn: async () => {
       const response = await fetch(
