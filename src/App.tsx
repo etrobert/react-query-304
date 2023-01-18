@@ -1,9 +1,15 @@
 import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import "./App.css";
+import useData from "./useData";
+import useConsoleLog from "./useConsoleLog";
 
 function App() {
   const [count, setCount] = useState(0);
+
+  const data = useData();
+
+  useConsoleLog(data);
 
   return (
     <div className="App">
