@@ -10,14 +10,18 @@ type Something = {
 const memoizedHydrateData = memoize(hydrateData);
 
 const useData = () => {
-  const { data } = useQuery<Something[]>({
+  const { data } = useQuery<{ data: Something[]; requestId: number }>({
     queryKey: ["localhost:8000"],
     queryFn: async () => {
       const response = await fetch(
         "https://63c82dec5c0760f69ac701ee.mockapi.io/events"
       );
+      const requestId = Math.random();
       console.log("Received:", response);
-      return response.json();
+      return {
+        data: await response.json(),
+        requestId,
+      };
     },
   });
 

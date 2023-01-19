@@ -6,7 +6,7 @@ const Component = () => {
 
   useConsoleLog(data);
 
-  return <p>{data?.map((item) => item.id)}</p>;
+  return <p>{data?.data.map((item) => item.id)}</p>;
 };
 
 export default Component;
