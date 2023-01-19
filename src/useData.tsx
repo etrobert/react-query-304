@@ -1,15 +1,9 @@
 import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
+import hydrateData from "./hydrateData";
 
 type Something = {
   id: string;
-};
-
-const hydrateData = <T,>(data: T): T => {
-  // Costly operation
-  console.log("Hydrating");
-  Array(50).map((n) => Math.sqrt(n));
-  return data;
 };
 
 const useData = () => {
