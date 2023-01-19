@@ -1,10 +1,13 @@
 import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
+import memoize from "lodash/memoize";
 import hydrateData from "./hydrateData";
 
 type Something = {
   id: string;
 };
+
+const memoizedHydrateData = memoize(hydrateData);
 
 const useData = () => {
   const { data } = useQuery<Something[]>({
@@ -18,7 +21,7 @@ const useData = () => {
     },
   });
 
-  const hydratedData = useMemo(() => hydrateData(data), [data]);
+  const hydratedData = useMemo(() => memoizedHydrateData(data), [data]);
 
   return hydratedData;
 };
